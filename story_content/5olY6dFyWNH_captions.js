@@ -1,0 +1,1 @@
+window.globalProvideData('caption', '{"data":"WEBVTT%0D%0AKind:%20captions%0D%0ASource:%20Articulate%20Closed%20Captions%20Editor%0D%0ASource%20Version:%203.96.33815.0%0D%0A%0D%0A00:00:00.075%20--%3E%2000:00:02.804%0D%0Aet%20le%20plan%20sant%C3%A9,%20est%20d%C3%A9finit%20sur%205%20ans%20maximum%0D%0A%0D%0A"}')

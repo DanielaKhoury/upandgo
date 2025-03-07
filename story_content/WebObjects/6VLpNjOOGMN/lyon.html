@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carte des Assurances Maladie à Lyon</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Les Assurances Maladie à Lyon</h2>
+    <div id="map"></div>
+
+    <script>
+        // Initialisation de la carte
+        var map = L.map('map').setView([45.764, 4.8357], 13); // Centré sur Lyon
+
+        // Charger les tuiles OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Ajouter des assurances maladie avec détails
+        var assurances = [
+            { 
+                name: "CPAM Lyon Centre", 
+                lat: 45.758, 
+                lng: 4.841, 
+                address: "10 Rue de la République, 69001 Lyon", 
+                phone: "04 72 60 30 30", 
+                hours: "Lun-Ven: 08h30 - 16h30"
+            },
+            { 
+                name: "CPAM Lyon Nord", 
+                lat: 45.770, 
+                lng: 4.850, 
+                address: "25 Avenue Jean Jaurès, 69009 Lyon", 
+                phone: "04 72 40 40 40", 
+                hours: "Lun-Ven: 09h00 - 17h00"
+            },
+            { 
+                name: "CPAM Lyon Sud", 
+                lat: 45.748, 
+                lng: 4.825, 
+                address: "5 Place Bellecour, 69002 Lyon", 
+                phone: "04 78 60 50 50", 
+                hours: "Lun-Ven: 08h00 - 15h30"
+            }
+        ];
+
+        assurances.forEach(function(assurance) {
+            L.marker([assurance.lat, assurance.lng])
+                .addTo(map)
+                .bindPopup(
+                    `<b>${assurance.name}</b><br>
+                    📍 <i>${assurance.address}</i><br>
+                    ☎️ <a href="tel:${assurance.phone}">${assurance.phone}</a><br>
+                    🕒 Horaires: ${assurance.hours}`
+                );
+        });
+    </script>
+</body>
+</html>

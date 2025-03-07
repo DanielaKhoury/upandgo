@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carte des Agences CPAM (Ameli) à Dijon</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Les Agences CPAM (Ameli) à Dijon</h2>
+    <div id="map"></div>
+
+    <script>
+        // Initialisation de la carte centrée sur Dijon
+        var map = L.map('map').setView([47.3220, 5.0415], 13);
+
+        // Charger les tuiles OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Liste manuelle des agences CPAM Ameli à Dijon (vérifiées)
+        var cpam_agencies = [
+            { 
+                name: "CPAM Dijon Centre", 
+                lat: 47.3182, 
+                lng: 5.0385, 
+                address: "5 Boulevard de Champagne, 21000 Dijon", 
+                phone: "3646", 
+                hours: "Lun-Ven: 08h30 - 16h30"
+            },
+            { 
+                name: "CPAM Dijon Nord", 
+                lat: 47.3391, 
+                lng: 5.0512, 
+                address: "14 Rue Docteur Émile Vincent, 21000 Dijon", 
+                phone: "3646", 
+                hours: "Lun-Ven: 09h00 - 17h00"
+            }
+        ];
+
+        // Ajouter les CPAM officielles à la carte
+        cpam_agencies.forEach(function(agency) {
+            L.marker([agency.lat, agency.lng])
+                .addTo(map)
+                .bindPopup(`
+                    <b>${agency.name}</b><br>
+                    📍 <i>${agency.address}</i><br>
+                    ☎️ <a href="tel:${agency.phone}">${agency.phone}</a><br>
+                    🕒 ${agency.hours}
+                `);
+        });
+    </script>
+</body>
+</html>

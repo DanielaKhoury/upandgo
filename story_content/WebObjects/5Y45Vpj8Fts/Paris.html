@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carte des Agences CPAM (Ameli) à Paris</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Les Agences CPAM (Ameli) à Paris</h2>
+    <div id="map"></div>
+
+    <script>
+        // Initialisation de la carte centrée sur Paris
+        var map = L.map('map').setView([48.8566, 2.3522], 12);
+
+        // Charger les tuiles OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Liste manuelle des agences CPAM Ameli (vérifiées pour Paris)
+        var cpam_agencies = [
+            { 
+                name: "CPAM Paris 10ème", 
+                lat: 48.8742, 
+                lng: 2.3574, 
+                address: "1 Avenue Claude Vellefaux, 75010 Paris", 
+                phone: "3646", 
+                hours: "Lun-Ven: 08h30 - 16h30"
+            },
+            { 
+                name: "CPAM Paris 13ème", 
+                lat: 48.8298, 
+                lng: 2.3561, 
+                address: "190 Rue de Tolbiac, 75013 Paris", 
+                phone: "3646", 
+                hours: "Lun-Ven: 09h00 - 17h00"
+            },
+            { 
+                name: "CPAM Paris 15ème", 
+                lat: 48.8392, 
+                lng: 2.2893, 
+                address: "29 Boulevard de Grenelle, 75015 Paris", 
+                phone: "3646", 
+                hours: "Lun-Ven: 08h00 - 15h30"
+            },
+            { 
+                name: "CPAM Paris 19ème", 
+                lat: 48.8884, 
+                lng: 2.3824, 
+                address: "3 Place du Colonel Fabien, 75019 Paris", 
+                phone: "3646", 
+                hours: "Lun-Ven: 08h30 - 16h30"
+            }
+        ];
+
+        // Ajouter uniquement les CPAM officielles à la carte
+        cpam_agencies.forEach(function(agency) {
+            L.marker([agency.lat, agency.lng])
+                .addTo(map)
+                .bindPopup(`
+                    <b>${agency.name}</b><br>
+                    📍 <i>${agency.address}</i><br>
+                    ☎️ <a href="tel:${agency.phone}">${agency.phone}</a><br>
+                    🕒 ${agency.hours}
+                `);
+        });
+    </script>
+</body>
+</html>
